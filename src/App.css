@@ -1,38 +1,165 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@400&display=swap');
+
+.wrapper {
+  cursor: none;
+  width: 100vw;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.space-creator {
+  width: 25vw;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.divider {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  font-size: larger;
+  font-family: 'Josefin Slab', serif;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.progress-bar {
+  position: fixed;
+  top: 60px;
+  right: 0;
+  left: 0;
+  height: 5px;
+}
+
+.navbar-custom {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: left;
+  padding: 0.5rem 1rem;
+  height: 60px;
 }
 
-.App-link {
-  color: #61dafb;
+.nav-links {
+  margin: 0 !important;
+  font-family: 'Josefin Slab', serif;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.page {
+  min-height: 100vh;
+  padding: 5vh 0;
+}
+
+.section {
+  max-width: 100vw;
+}
+
+.section-text {
+  font-family: 'Josefin Slab', serif;
+  display: table;
+  max-width: 48vw;
+  margin: 2vh 0 0 2vw;
+}
+
+.center-section-text {
+  display: table-cell;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+.section-image {
+  max-width: 48vw;
+  max-height: 80vh;
+  border-radius: 0px;
+  margin: 0 2vw 2vh 0;
+}
+
+.cursor {
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: top 0.05s ease;
+  transition: left 0.05s ease;
+  z-index: 10;
+}
+
+.transform-cursor {
+  animation: cursor-fade 1s ease;
+  -webkit-animation: cursor-fade 1s ease;
+  animation-iteration-count: 1;
+  -webkit-animation-iteration-count: 1;
+}
+
+@keyframes cursor-fade {
+  0% {
+    width: 15px;
+    height: 15px;
+    opacity: 1;
   }
-  to {
-    transform: rotate(360deg);
+  80% {
+    width: 60px;
+    height: 60px;
+    opacity: 0;
+  }
+  81% {
+    width: 0px;
+    height: 0px;
+    opacity: 1;
+  }
+  100% {
+    width: 15px;
+    height: 15px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes cursor-fade {
+  0% {
+    width: 15px;
+    height: 15px;
+    opacity: 1;
+  }
+  80% {
+    width: 60px;
+    height: 60px;
+    opacity: 0;
+  }
+  81% {
+    width: 0px;
+    height: 0px;
+    opacity: 1;
+  }
+  100% {
+    width: 15px;
+    height: 15px;
+    opacity: 1;
+  }
+}
+
+.transform-indicator {
+  height: 3px;
+  width: 30px;
+  animation: indicator-stretch 1s ease;
+  -webkit-animation: indicator-stretch 1s ease;
+  animation-iteration-count: 1;
+  -webkit-animation-iteration-count: 1;
+}
+
+@keyframes indicator-stretch {
+  0% {
+    width: 0px;
+  }
+  100% {
+    width: 30px;
+  }
+}
+
+@-webkit-keyframes indicator-stretch {
+  0% {
+    width: 0px;
+  }
+  100% {
+    width: 30px;
   }
 }
