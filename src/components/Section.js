@@ -13,7 +13,7 @@ function Section({ text, img, color }) {
         }}></div>
       <div className='d-flex flex-row justify-content-start align-items-center'>
         <div className='section-text' style={{ color: color.fgColor }}>
-          <span className='display-4 center-section-text'>{text}</span>
+          <span className='h1 center-section-text'>{text}</span>
         </div>
       </div>
       <div className='d-flex flex-row justify-content-end align-items-center'>

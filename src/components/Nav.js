@@ -5,7 +5,7 @@ function Nav({ link, text, color, position }) {
     <a
       className='d-flex flex-column justify-content-center align-items-center text-decoration-none'
       style={{ color: color, cursor: 'none' }}
-      href={`#${link}`}>
+      onClick={link}>
       <span className='navbar-brand nav-links'>{text}</span>
       <div
         className={
@@ -20,7 +20,7 @@ function Nav({ link, text, color, position }) {
 }
 
 Nav.propTypes = {
-  link: PropTypes.string,
+  link: PropTypes.func,
   text: PropTypes.string,
   color: PropTypes.string,
   position: PropTypes.object,

@@ -31,10 +31,6 @@ const colors = [
 const getRandomIdx = () =>
   Math.floor(Math.random() * Math.floor(colors.length - 1))
 
-function listenScrollEvent() {
-  console.log('Scroll event detected!')
-}
-
 function App() {
   let [colorIdx, setColorIdx] = useState(0)
   let [posotion, setPosition] = useState({ top: 0, left: 0 })
@@ -79,10 +75,11 @@ function App() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [scroll, pagePosition])
 
+  const scrollOption = { behavior: 'smooth', block: 'start' }
   let color = colors[colorIdx]
 
   return (
-    <div className='wrapper' onScroll={listenScrollEvent}>
+    <div className='wrapper'>
       <div
         className={transform ? ' cursor transform-cursor' : 'cursor'}
         style={{
@@ -97,11 +94,7 @@ function App() {
       <div
         onMouseOver={() => setShow(true)}
         onMouseOut={() => setShow(false)}
-        onMouseMove={(e) => setPosition({ top: e.pageY, left: e.pageX })}
-        onMouseDown={() => {
-          setTransform(true)
-          setColorIdx(getRandomIdx())
-        }}>
+        onMouseMove={(e) => setPosition({ top: e.pageY, left: e.pageX })}>
         <nav
           className='navbar-custom'
           style={{
@@ -111,21 +104,21 @@ function App() {
           <span className='navbar-brand nav-links'>NAVBAR</span>
           <span className='space-creator'></span>
           <Nav
-            link='page1'
+            link={() => pageRef1.current.scrollIntoView(scrollOption)}
             text='Page 1'
             color={color.fgColor}
             position={pagePosition.page1}
           />
           <span className='divider'>|</span>
           <Nav
-            link='page2'
+            link={() => pageRef2.current.scrollIntoView(scrollOption)}
             text='Page 2'
             color={color.fgColor}
             position={pagePosition.page2}
           />
           <span className='divider'>|</span>
           <Nav
-            link='page3'
+            link={() => pageRef3.current.scrollIntoView(scrollOption)}
             text='Page 3'
             color={color.fgColor}
             position={pagePosition.page3}
@@ -136,74 +129,76 @@ function App() {
           style={{ backgroundColor: color.fgColor, width: `${scroll}%` }}
         />
         <div
-          id='page1'
-          ref={pageRef1}
-          className='page'
-          style={{
-            backgroundColor: color.bgColor,
+          onMouseDown={() => {
+            setTransform(true)
+            setColorIdx(getRandomIdx())
           }}>
-          <Section
-            text='React has been designed from the start for gradual adoption, and
+          <div
+            ref={pageRef1}
+            className='page'
+            style={{
+              backgroundColor: color.bgColor,
+            }}>
+            <Section
+              text='React has been designed from the start for gradual adoption, and
             you can use as little or as much React as you need. Whether you
             want to get a taste of React, add some interactivity to a simple
             HTML page, or start a complex React-powered app, the links in
             this section will help you get started.'
-            img={img1}
-            color={color}
-          />
-          <Section
-            text='Quickly design and customize responsive mobile-first sites with
+              img={img1}
+              color={color}
+            />
+            <Section
+              text='Quickly design and customize responsive mobile-first sites with
             Bootstrap, the world’s most popular front-end open source
             toolkit, featuring Sass variables and mixins, responsive grid
             system, extensive prebuilt components, and powerful JavaScript
             plugins.'
-            img={img2}
-            color={color}
-          />
-        </div>
+              img={img2}
+              color={color}
+            />
+          </div>
 
-        <div
-          id='page2'
-          ref={pageRef2}
-          className='page'
-          style={{
-            backgroundColor: color.bgColor,
-          }}>
-          <Section
-            text='Unsplash is a platform powered by an amazing community that has gifted
+          <div
+            ref={pageRef2}
+            className='page'
+            style={{
+              backgroundColor: color.bgColor,
+            }}>
+            <Section
+              text='Unsplash is a platform powered by an amazing community that has gifted
             hundreds of thousands of their own photos to fuel creativity around the world.
             So sign up for free, or don’t. Either way, you’ve got access to over a million
             photos under the Unsplash license—which makes them free to do-whatever-you-want with.'
-            img={img3}
-            color={color}
-          />
-          <Section
-            text='Stack Overflow for Teams, our core SaaS collaboration product,
+              img={img3}
+              color={color}
+            />
+            <Section
+              text='Stack Overflow for Teams, our core SaaS collaboration product,
             is helping thousands of companies around the world as the transition to remote work,
             address business continuity challenges, and undergo digital transformation.'
-            img={img4}
-            color={color}
-          />
-        </div>
+              img={img4}
+              color={color}
+            />
+          </div>
 
-        <div
-          id='page3'
-          ref={pageRef3}
-          className='page'
-          style={{
-            backgroundColor: color.bgColor,
-          }}>
-          <Section
-            text='We believe the best way to bring personality and performance to websites and
+          <div
+            ref={pageRef3}
+            className='page'
+            style={{
+              backgroundColor: color.bgColor,
+            }}>
+            <Section
+              text='We believe the best way to bring personality and performance to websites and
             products is through great design and technology. Our goal is to make that process
             simple, by offering an intuitive and robust collection of open source designer web
             fonts. By using our extensive catalog, you can share and integrate typography into any
             design project seamlessly—no matter where you are in the world.'
-            img={img5}
-            color={color}
-          />
-          <Section
-            text='Our font catalog places typography front and center, inviting users to explore,
+              img={img5}
+              color={color}
+            />
+            <Section
+              text='Our font catalog places typography front and center, inviting users to explore,
             sort, and test fonts for use in more than 135 languages. We showcase individual type
             designers and foundries, giving you valuable information about the people and their processes,
             as well as analytics on usage and demographics. Our series of thematic collections helps you
@@ -213,9 +208,10 @@ function App() {
             by filtering families, weights, and scripts, plus test color themes, and review sample copy.
             Collections can be shared, making it easy to collaborate on projects and ensure typography is
             optimized and streamlined throughout the design and engineering process.'
-            img={img6}
-            color={color}
-          />
+              img={img6}
+              color={color}
+            />
+          </div>
         </div>
       </div>
     </div>
