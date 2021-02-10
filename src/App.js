@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Section from './components/Section'
 import Nav from './components/Nav'
 import './App.css'
@@ -41,6 +41,15 @@ function App() {
   let [transform, setTransform] = useState(false)
   let [show, setShow] = useState(true)
   let [scroll, setScroll] = useState(0)
+  let [pagePosition, setPagePosition] = useState({
+    page1: { top: 0, bottom: 100 },
+    page2: { top: 101, bottom: 200 },
+    page3: { top: 201, bottom: 300 },
+  })
+
+  let pageRef1 = useRef(null)
+  let pageRef2 = useRef(null)
+  let pageRef3 = useRef(null)
 
   useEffect(() => {
     const onScroll = (e) => {
@@ -50,11 +59,25 @@ function App() {
         e.target.documentElement.clientHeight
       let num = (scrollTop / maxScroll) * 100
       setScroll(Math.round((num + Number.EPSILON) * 100) / 100)
+      setPagePosition({
+        page1: {
+          top: pageRef1.current.getBoundingClientRect().top,
+          bottom: pageRef1.current.getBoundingClientRect().bottom,
+        },
+        page2: {
+          top: pageRef2.current.getBoundingClientRect().top,
+          bottom: pageRef2.current.getBoundingClientRect().bottom,
+        },
+        page3: {
+          top: pageRef3.current.getBoundingClientRect().top,
+          bottom: pageRef3.current.getBoundingClientRect().bottom,
+        },
+      })
     }
     window.addEventListener('scroll', onScroll)
 
     return () => window.removeEventListener('scroll', onScroll)
-  }, [scroll])
+  }, [scroll, pagePosition])
 
   let color = colors[colorIdx]
 
@@ -87,11 +110,26 @@ function App() {
           }}>
           <span className='navbar-brand nav-links'>NAVBAR</span>
           <span className='space-creator'></span>
-          <Nav link='page1' text='Page 1' color={color.fgColor} />
+          <Nav
+            link='page1'
+            text='Page 1'
+            color={color.fgColor}
+            position={pagePosition.page1}
+          />
           <span className='divider'>|</span>
-          <Nav link='page2' text='Page 2' color={color.fgColor} />
+          <Nav
+            link='page2'
+            text='Page 2'
+            color={color.fgColor}
+            position={pagePosition.page2}
+          />
           <span className='divider'>|</span>
-          <Nav link='page3' text='Page 3' color={color.fgColor} />
+          <Nav
+            link='page3'
+            text='Page 3'
+            color={color.fgColor}
+            position={pagePosition.page3}
+          />
         </nav>
         <div
           className='progress-bar'
@@ -99,6 +137,7 @@ function App() {
         />
         <div
           id='page1'
+          ref={pageRef1}
           className='page'
           style={{
             backgroundColor: color.bgColor,
@@ -125,6 +164,7 @@ function App() {
 
         <div
           id='page2'
+          ref={pageRef2}
           className='page'
           style={{
             backgroundColor: color.bgColor,
@@ -148,6 +188,7 @@ function App() {
 
         <div
           id='page3'
+          ref={pageRef3}
           className='page'
           style={{
             backgroundColor: color.bgColor,
