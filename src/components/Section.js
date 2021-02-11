@@ -11,12 +11,12 @@ function Section({ text, img, color }) {
           borderTop: `2px solid ${color.fgColor}`,
           margin: 'auto',
         }}></div>
-      <div className='d-flex flex-row justify-content-start align-items-center'>
+      <div className='section-text-wrapper'>
         <div className='section-text' style={{ color: color.fgColor }}>
           <span className='h1 center-section-text'>{text}</span>
         </div>
       </div>
-      <div className='d-flex flex-row justify-content-end align-items-center'>
+      <div className='section-image-wrapper'>
         <img className='section-image' src={img} alt='about text'></img>
       </div>
     </div>

@@ -33,7 +33,7 @@ const getRandomIdx = () =>
 
 function App() {
   let [colorIdx, setColorIdx] = useState(0)
-  let [posotion, setPosition] = useState({ top: 0, left: 0 })
+  let [position, setPosition] = useState({ top: -100, left: -100 })
   let [transform, setTransform] = useState(false)
   let [show, setShow] = useState(true)
   let [scroll, setScroll] = useState(0)
@@ -43,6 +43,7 @@ function App() {
     page3: { top: 201, bottom: 300 },
   })
 
+  let wrapperRef = useRef(null)
   let pageRef1 = useRef(null)
   let pageRef2 = useRef(null)
   let pageRef3 = useRef(null)
@@ -70,6 +71,7 @@ function App() {
         },
       })
     }
+    setPosition({ top: -100, left: -100 })
     window.addEventListener('scroll', onScroll)
 
     return () => window.removeEventListener('scroll', onScroll)
@@ -79,12 +81,12 @@ function App() {
   let color = colors[colorIdx]
 
   return (
-    <div className='wrapper'>
+    <div className='wrapper' ref={wrapperRef}>
       <div
         className={transform ? ' cursor transform-cursor' : 'cursor'}
         style={{
-          top: posotion.top,
-          left: posotion.left,
+          top: position.top,
+          left: position.left,
           backgroundColor: color.fgColor,
           display: show ? 'block' : 'none',
         }}
