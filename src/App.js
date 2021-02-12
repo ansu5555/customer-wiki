@@ -105,26 +105,28 @@ function App() {
           }}>
           <span className='navbar-brand nav-links'>NAVBAR</span>
           <span className='space-creator'></span>
-          <Nav
-            link={() => pageRef1.current.scrollIntoView(scrollOption)}
-            text='Page 1'
-            color={color.fgColor}
-            position={pagePosition.page1}
-          />
-          <span className='divider'>|</span>
-          <Nav
-            link={() => pageRef2.current.scrollIntoView(scrollOption)}
-            text='Page 2'
-            color={color.fgColor}
-            position={pagePosition.page2}
-          />
-          <span className='divider'>|</span>
-          <Nav
-            link={() => pageRef3.current.scrollIntoView(scrollOption)}
-            text='Page 3'
-            color={color.fgColor}
-            position={pagePosition.page3}
-          />
+          <div className='nav-link-wrapper'>
+            <Nav
+              link={() => pageRef1.current.scrollIntoView(scrollOption)}
+              text='Page 1'
+              color={color.fgColor}
+              position={pagePosition.page1}
+            />
+            <span className='divider'>|</span>
+            <Nav
+              link={() => pageRef2.current.scrollIntoView(scrollOption)}
+              text='Page 2'
+              color={color.fgColor}
+              position={pagePosition.page2}
+            />
+            <span className='divider'>|</span>
+            <Nav
+              link={() => pageRef3.current.scrollIntoView(scrollOption)}
+              text='Page 3'
+              color={color.fgColor}
+              position={pagePosition.page3}
+            />
+          </div>
         </nav>
         <div
           className='progress-bar'

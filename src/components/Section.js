@@ -2,9 +2,7 @@ import PropTypes from 'prop-types'
 
 function Section({ text, img, color }) {
   return (
-    <div
-      className='d-flex flex-column section'
-      style={{ backgroundColor: color.bgColor }}>
+    <div className='section' style={{ backgroundColor: color.bgColor }}>
       <div
         style={{
           width: '98vw',
@@ -13,7 +11,7 @@ function Section({ text, img, color }) {
         }}></div>
       <div className='section-text-wrapper'>
         <div className='section-text' style={{ color: color.fgColor }}>
-          <span className='h1 center-section-text'>{text}</span>
+          <span className='center-section-text'>{text}</span>
         </div>
       </div>
       <div className='section-image-wrapper'>
